@@ -1,359 +1,386 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>30-Day Networking Roadmap</title>
+  <title>Anmol Garg — 30-Day Networking Roadmap</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="roadmap">
-  <div class="progress-bar-wrap">
-    <div class="progress-label"><span>Your progress</span><span id="prog-txt">0 / 30 days</span></div>
-    <div class="progress-outer"><div class="progress-inner" id="prog-bar" style="width:0%"></div></div>
+  <div class="wrap">
+
+    <!-- ── HERO ── -->
+    <div class="hero">
+      <div class="hero-eyebrow">Networking Mastery Plan</div>
+      <h1 class="hero-name">Anmol Garg</h1>
+      <div class="hero-subtitle">// 30-DAY NOC / L1 ENGINEER ROADMAP</div>
+      <div class="hero-meta">
+        <div class="status-badge">
+          <span class="status-dot"></span>Active Training
+        </div>
+        <span class="hero-days">Started Day 1 · 30 days total</span>
+      </div>
+    </div>
+
+    <!-- ── MARQUEE ── -->
+    <div class="quote-strip">
+      <div class="marquee-track" id="marquee">
+        <div class="marquee-item">Every packet you drop teaches you more than one that makes it through</div>
+        <div class="marquee-item">A network engineer who can't break things can't fix things</div>
+        <div class="marquee-item">Layer 1 lies. Layer 3 deceives. Layer 7 just gaslights.</div>
+        <div class="marquee-item">OSPF doesn't fail. Your config does.</div>
+        <div class="marquee-item">The real subnet is the VLANs we configured along the way</div>
+        <div class="marquee-item">show ip route — or it didn't happen</div>
+        <div class="marquee-item">Ping is not proof of life. It's a starting point.</div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-item">Every packet you drop teaches you more than one that makes it through</div>
+        <div class="marquee-item">A network engineer who can't break things can't fix things</div>
+        <div class="marquee-item">Layer 1 lies. Layer 3 deceives. Layer 7 just gaslights.</div>
+        <div class="marquee-item">OSPF doesn't fail. Your config does.</div>
+        <div class="marquee-item">The real subnet is the VLANs we configured along the way</div>
+        <div class="marquee-item">show ip route — or it didn't happen</div>
+        <div class="marquee-item">Ping is not proof of life. It's a starting point.</div>
+      </div>
+    </div>
+
+    <!-- ── QUOTE CARD ── -->
+    <div class="quote-card">
+      <button class="quote-rotate-btn" onclick="rotateQuote()">↻ New Quote</button>
+      <span class="quote-mark">"</span>
+      <div class="quote-text" id="quote-text">The <em>network never lies</em> — your assumptions do. Chase the signal, trust the tools, and the answer is always in the output.</div>
+      <div class="quote-author" id="quote-author">— ANMOL'S RULE #1</div>
+    </div>
+
+    <!-- ── PROGRESS ── -->
+    <div class="progress-block">
+      <div class="progress-top">
+        <div class="progress-label-main">Overall Progress</div>
+        <div class="progress-count" id="prog-txt">0 <span>/ 30 days</span></div>
+      </div>
+      <div class="progress-outer">
+        <div class="progress-inner" id="prog-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- ── WEEKS INJECTED BY JS ── -->
+    <div id="weeks"></div>
+
   </div>
 
-  <div id="weeks"></div>
-</div>
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    Built for <strong>Anmol Garg</strong> &nbsp;·&nbsp; 30 days to NOC/L1 &nbsp;·&nbsp; Stay consistent, stay hungry
+  </div>
 
 <script>
+/* ── QUOTES ── */
+const QUOTES = [
+  { text: "The <em>network never lies</em> — your assumptions do. Chase the signal, trust the tools, and the answer is always in the output.", author: "— ANMOL'S RULE #1" },
+  { text: "Every <em>troubleshoot session</em> you finish is a story you can tell in an interview. Build the story deliberately.", author: "— NOC WISDOM" },
+  { text: "Don't memorize commands. <em>Understand why</em> the command exists. The WHY is what the interviewer is actually testing.", author: "— L1 INTERVIEW TRUTH" },
+  { text: "A junior who <em>documents everything</em> is worth more than a senior who keeps it all in their head.", author: "— TEAM LEAD, EVERY COMPANY" },
+  { text: "You're not learning Cisco IOS. You're learning <em>how networks think.</em> The vendor is just the language.", author: "— CCNA PHILOSOPHY" },
+  { text: "The difference between <em>a good engineer and a great one</em> is not the fix — it's the documentation of the fix.", author: "— INCIDENT REPORT TRUTH" },
+  { text: "Packet Tracer breaks are more valuable than YouTube tutorials. <em>Break things on purpose.</em> Fix them with intent.", author: "— HANDS-ON > PASSIVE LEARNING" },
+  { text: "30 days from now, you'll look back and realize the only thing standing between you and the job was <em>consistent action.</em>", author: "— DAY 1 MOTIVATION" },
+];
+let currentQuote = 0;
+function rotateQuote() {
+  currentQuote = (currentQuote + 1) % QUOTES.length;
+  const q = QUOTES[currentQuote];
+  document.getElementById('quote-text').innerHTML = q.text;
+  document.getElementById('quote-author').textContent = q.author;
+}
+setInterval(rotateQuote, 14000);
+
+/* ── WEEK DATA ── */
 const weeks = [
   {
-    label: "Week 1", cls: "w1", title: "Subnetting + VLANs (Foundation Lock-In)",
+    label: "Week 1", cls: "w1",
+    title: "Subnetting + VLANs (Foundation Lock-In)",
     sub: "Days 1–7 · Non-negotiable basics",
     days: [
-      {
-        day:1, title:"IP addressing & subnetting speed",
-        tags:["theory","lab"],
-        learn:["VLSM — what is it and WHY companies use it","Subnetting without a calculator (practice /24 /26 /28 /30)","Company use case: ISP gives you 1 block, you split for branches"],
-        lab:["In Packet Tracer: assign /26 subnet to 4 PCs, verify ping","Calculate 5 subnets from 192.168.1.0/24 mentally"],
-        challenge:["BREAK IT: assign wrong mask on one PC. Debug why ping fails","Symptom: PC1 pings PC2 but not PC3 — find the mask mismatch"],
-        interview:["Why does a company use VLSM instead of class A/B/C?","What is the broadcast address of 10.0.0.0/28?"]
-      },
-      {
-        day:2, title:"VLANs — company reason + config",
-        tags:["theory","lab"],
-        learn:["WHY companies use VLANs: HR should NOT see Finance traffic","Broadcast domain reduction — what it means in a 500-PC office","802.1Q tagging — how switches know which VLAN a frame belongs to"],
-        lab:["Create VLAN 10 (HR), VLAN 20 (IT), VLAN 30 (Admin) in PT","Assign ports to VLANs — verify hosts in same VLAN ping each other"],
-        challenge:["BREAK IT: assign PC in VLAN 10 to access port of VLAN 20 — observe what breaks","Show the symptom before fix, document both"],
-        interview:["Difference between VLAN and subnet?","Why do companies separate departments with VLANs?"]
-      },
-      {
-        day:3, title:"Trunking + Inter-VLAN routing",
-        tags:["theory","lab"],
-        learn:["Trunk port vs access port — when to use each","Router-on-a-stick: one physical link, multiple sub-interfaces","Layer 3 switch as alternative (faster, used in most companies)"],
-        lab:["Configure trunk between switch and router","Add sub-interfaces fa0/0.10 fa0/0.20 — verify cross-VLAN ping"],
-        challenge:["BREAK IT: native VLAN mismatch. Symptom: some VLANs work, one doesn't","BREAK IT: encapsulation not set on sub-interface — debug the error"],
-        interview:["PC in VLAN 10 can't reach PC in VLAN 20 — walk me through your debug steps"]
-      },
-      {
-        day:4, title:"STP basics (Spanning Tree)",
-        tags:["theory","lab"],
-        learn:["WHY STP exists: broadcast storm without it kills the network","Root bridge election — why companies care which switch wins","Port states: blocking, listening, learning, forwarding"],
-        lab:["Build 3-switch loop in PT, observe STP blocking port","Change bridge priority, verify new root bridge"],
-        challenge:["BREAK IT: disable STP on one switch, observe what happens (broadcast storm)"],
-        interview:["What happens if STP is not running in a looped topology?","What is a root bridge?"]
-      },
-      {
-        day:5, title:"EtherChannel + Port Security",
-        tags:["theory","lab"],
-        learn:["EtherChannel: 2–8 links bundled as one — used for uplinks in real offices","Port security: lock a port to a specific MAC — prevents rogue devices"],
-        lab:["Configure LACP EtherChannel between 2 switches","Set port security max 2 MACs, sticky, shutdown violation"],
-        challenge:["BREAK IT: connect unauthorized device to port-secured port — what error shows?","BREAK IT: mismatched EtherChannel mode (one side active, one side on) — debug"],
-        interview:["How does port security protect a company network?"]
-      },
-      {
-        day:6, title:"Static routing + basic troubleshooting",
-        tags:["theory","lab","challenge"],
-        learn:["Static route: when to use vs dynamic (small networks, stub links)","show ip route — reading the output correctly","Administrative distance — why it matters when two routes exist"],
-        lab:["3-router topology, static routes to reach all networks","Remove one route, test what breaks"],
-        challenge:["BREAK IT: wrong next-hop IP on static route — PC gets 'destination unreachable'","BREAK IT: missing return route — one-way ping. Explain why this happens"],
-        interview:["Ping works but traceroute shows timeout at hop 2 — what does that mean?"]
-      },
-      {
-        day:7, title:"Week 1 review + mini project",
-        tags:["project","lab"],
-        learn:["Build complete office topology from scratch","VLAN + trunking + inter-VLAN + static route — all in one"],
-        lab:["Office: VLAN 10 HR, VLAN 20 IT, VLAN 30 Admin, Router connecting all","Verify full connectivity, then intentionally break 3 things and fix them"],
-        challenge:["Break 1: wrong VLAN on access port","Break 2: missing inter-VLAN sub-interface","Break 3: wrong static route"],
-        interview:["Walk me through how you'd build a small office network from scratch"]
-      }
+      { day: 1, title: "IP addressing & subnetting speed", tags: ["theory","lab"],
+        learn: ["VLSM — what it is and WHY companies use it","Subnetting without a calculator (practice /24 /26 /28 /30)","Company use case: ISP gives you 1 block, you split for branches"],
+        lab: ["In Packet Tracer: assign /26 subnet to 4 PCs, verify ping","Calculate 5 subnets from 192.168.1.0/24 mentally"],
+        challenge: ["BREAK IT: assign wrong mask on one PC. Debug why ping fails","Symptom: PC1 pings PC2 but not PC3 — find the mask mismatch"],
+        interview: ["Why does a company use VLSM instead of class A/B/C?","What is the broadcast address of 10.0.0.0/28?"] },
+      { day: 2, title: "VLANs — company reason + config", tags: ["theory","lab"],
+        learn: ["WHY companies use VLANs: HR should NOT see Finance traffic","Broadcast domain reduction — what it means in a 500-PC office","802.1Q tagging — how switches know which VLAN a frame belongs to"],
+        lab: ["Create VLAN 10 (HR), VLAN 20 (IT), VLAN 30 (Admin) in PT","Assign ports to VLANs — verify hosts in same VLAN ping each other"],
+        challenge: ["BREAK IT: assign PC in VLAN 10 to access port of VLAN 20 — observe what breaks","Show the symptom before fix, document both"],
+        interview: ["Difference between VLAN and subnet?","Why do companies separate departments with VLANs?"] },
+      { day: 3, title: "Trunking + Inter-VLAN routing", tags: ["theory","lab"],
+        learn: ["Trunk port vs access port — when to use each","Router-on-a-stick: one physical link, multiple sub-interfaces","Layer 3 switch as alternative (faster, used in most companies)"],
+        lab: ["Configure trunk between switch and router","Add sub-interfaces fa0/0.10 fa0/0.20 — verify cross-VLAN ping"],
+        challenge: ["BREAK IT: native VLAN mismatch. Symptom: some VLANs work, one doesn't","BREAK IT: encapsulation not set on sub-interface — debug the error"],
+        interview: ["PC in VLAN 10 can't reach PC in VLAN 20 — walk me through your debug steps"] },
+      { day: 4, title: "STP basics (Spanning Tree)", tags: ["theory","lab"],
+        learn: ["WHY STP exists: broadcast storm without it kills the network","Root bridge election — why companies care which switch wins","Port states: blocking, listening, learning, forwarding"],
+        lab: ["Build 3-switch loop in PT, observe STP blocking port","Change bridge priority, verify new root bridge"],
+        challenge: ["BREAK IT: disable STP on one switch, observe what happens (broadcast storm)"],
+        interview: ["What happens if STP is not running in a looped topology?","What is a root bridge?"] },
+      { day: 5, title: "EtherChannel + Port Security", tags: ["theory","lab"],
+        learn: ["EtherChannel: 2–8 links bundled as one — used for uplinks in real offices","Port security: lock a port to a specific MAC — prevents rogue devices"],
+        lab: ["Configure LACP EtherChannel between 2 switches","Set port security max 2 MACs, sticky, shutdown violation"],
+        challenge: ["BREAK IT: connect unauthorized device to port-secured port — what error shows?","BREAK IT: mismatched EtherChannel mode — debug"],
+        interview: ["How does port security protect a company network?"] },
+      { day: 6, title: "Static routing + basic troubleshooting", tags: ["theory","lab","challenge"],
+        learn: ["Static route: when to use vs dynamic (small networks, stub links)","show ip route — reading the output correctly","Administrative distance — why it matters when two routes exist"],
+        lab: ["3-router topology, static routes to reach all networks","Remove one route, test what breaks"],
+        challenge: ["BREAK IT: wrong next-hop IP on static route — PC gets 'destination unreachable'","BREAK IT: missing return route — one-way ping. Explain why this happens"],
+        interview: ["Ping works but traceroute shows timeout at hop 2 — what does that mean?"] },
+      { day: 7, title: "Week 1 review + mini project", tags: ["project","lab"],
+        learn: ["Build complete office topology from scratch","VLAN + trunking + inter-VLAN + static route — all in one"],
+        lab: ["Office: VLAN 10 HR, VLAN 20 IT, VLAN 30 Admin, Router connecting all","Verify full connectivity, then intentionally break 3 things and fix them"],
+        challenge: ["Break 1: wrong VLAN on access port","Break 2: missing inter-VLAN sub-interface","Break 3: wrong static route"],
+        interview: ["Walk me through how you'd build a small office network from scratch"] }
     ]
   },
   {
-    label: "Week 2", cls: "w2", title: "OSPF + NAT + DHCP (Job-Ready Protocols)",
+    label: "Week 2", cls: "w2",
+    title: "OSPF + NAT + DHCP (Job-Ready Protocols)",
     sub: "Days 8–14 · Most asked in L1/NOC interviews",
     days: [
-      {
-        day:8, title:"OSPF — why and how",
-        tags:["theory","lab"],
-        learn:["WHY OSPF over static: big company = 100s of routes, can't manually manage","OSPF areas — area 0 backbone, why it's required","DR/BDR election — only matters on multi-access networks"],
-        lab:["3 routers, single area OSPF 0 — full adjacency, verify show ip ospf neighbor","Verify routes in routing table: show ip route | section O"],
-        challenge:["BREAK IT: mismatch hello/dead timers — adjacency won't form. Debug","BREAK IT: wrong area number on one router — observe partial routing"],
-        interview:["Why would a company use OSPF instead of static routing?","What is an OSPF neighbor?"]
-      },
-      {
-        day:9, title:"OSPF troubleshooting deep dive",
-        tags:["challenge","lab"],
-        learn:["5 reasons OSPF neighbors don't form (area, MTU, auth, timers, subnet)","debug ip ospf events — reading the output","Passive interface — when and why (stops OSPF on LAN-facing ports)"],
-        lab:["Force 5 different OSPF failure scenarios — fix each"],
-        challenge:["BREAK IT: subnet mask mismatch between two routers — neighbors stuck in INIT","BREAK IT: authentication configured on one side only — debug the symptom"],
-        interview:["OSPF neighbor is stuck in EXSTART — what are the possible causes?"]
-      },
-      {
-        day:10, title:"NAT — real company use case",
-        tags:["theory","lab"],
-        learn:["WHY NAT: company has 1 public IP, 500 PCs — NAT is why this works","Static NAT: server needs to be reached from internet (web server, CCTV)","Dynamic NAT + overload (PAT): what 99% of offices use"],
-        lab:["Configure PAT: inside 192.168.1.0/24 → outside fa0/1 → internet","Test with ping, verify show ip nat translations"],
-        challenge:["BREAK IT: ip nat inside/outside on wrong interface — no internet. Debug","BREAK IT: ACL for NAT wrong — blocks wrong subnet"],
-        interview:["Why does every company use NAT?","Difference between static NAT and PAT?"]
-      },
-      {
-        day:11, title:"DHCP — server + relay",
-        tags:["theory","lab"],
-        learn:["DHCP DORA: Discover, Offer, Request, Acknowledge","ip helper-address: why needed when DHCP server is on different VLAN","Common DHCP issues: pool exhausted, wrong gateway in pool"],
-        lab:["Configure DHCP server on router, assign to VLAN 10 PCs","Add ip helper-address for VLAN 20 to reach same server"],
-        challenge:["BREAK IT: wrong default-router in DHCP pool — clients get IP but can't route","BREAK IT: pool exhausted — new device gets no IP. Fix with lease time"],
-        interview:["PC gets 169.254.x.x address — what does that mean?","What is DHCP relay and when is it used?"]
-      },
-      {
-        day:12, title:"ACL — standard + extended",
-        tags:["theory","lab"],
-        learn:["ACL use cases: block department from accessing servers, permit only HTTP","Standard ACL: based on source IP only — place close to DESTINATION","Extended ACL: src + dst + port — place close to SOURCE","Implicit deny at end — the most common mistake"],
-        lab:["Block VLAN 10 HR from accessing IT server (standard ACL)","Allow VLAN 20 to reach server only on port 80/443 (extended ACL)"],
-        challenge:["BREAK IT: ACL applied in wrong direction — traffic blocked that shouldn't be","BREAK IT: forgot to permit other traffic — implicit deny kills everything"],
-        interview:["HR team can't access the finance server — how would you check if ACL is blocking it?"]
-      },
-      {
-        day:13, title:"DNS basics + connectivity troubleshooting",
-        tags:["theory","lab","challenge"],
-        learn:["DNS: why 'google.com works but 8.8.8.8 doesn't' is a DNS issue","Reverse lookup, local DNS vs external","Ping vs nslookup vs traceroute — when to use which"],
-        lab:["Simulate: IP works, DNS fails — configure ip name-server","Traceroute to find routing break"],
-        challenge:["Scenario: User says 'internet is down'. Ping gateway = works. Ping 8.8.8.8 = works. Open browser = nothing. What is it?","Answer: DNS failure — walk through debug steps"],
-        interview:["Ping works but browser doesn't open websites — what do you check?"]
-      },
-      {
-        day:14, title:"Week 2 review + project 1",
-        tags:["project"],
-        learn:["Complete Office Network — Project 1","VLAN + OSPF + NAT + DHCP + ACL combined topology"],
-        lab:["Build: 2 branches connected via OSPF, DHCP per VLAN, NAT to internet, ACL restricting HR from Finance","This becomes your resume project"],
-        challenge:["Give yourself 5 intentional breaks to troubleshoot cold (without knowing what you broke)"],
-        interview:["Prepare 2-minute explanation of this project for interviews"]
-      }
+      { day: 8, title: "OSPF — why and how", tags: ["theory","lab"],
+        learn: ["WHY OSPF over static: big company = 100s of routes, can't manually manage","OSPF areas — area 0 backbone, why it's required","DR/BDR election — only matters on multi-access networks"],
+        lab: ["3 routers, single area OSPF 0 — full adjacency, verify show ip ospf neighbor","Verify routes: show ip route | section O"],
+        challenge: ["BREAK IT: mismatch hello/dead timers — adjacency won't form. Debug","BREAK IT: wrong area number on one router — observe partial routing"],
+        interview: ["Why would a company use OSPF instead of static routing?","What is an OSPF neighbor?"] },
+      { day: 9, title: "OSPF troubleshooting deep dive", tags: ["challenge","lab"],
+        learn: ["5 reasons OSPF neighbors don't form (area, MTU, auth, timers, subnet)","debug ip ospf events — reading the output","Passive interface — when and why (stops OSPF on LAN-facing ports)"],
+        lab: ["Force 5 different OSPF failure scenarios — fix each"],
+        challenge: ["BREAK IT: subnet mask mismatch between two routers — neighbors stuck in INIT","BREAK IT: authentication configured on one side only — debug the symptom"],
+        interview: ["OSPF neighbor is stuck in EXSTART — what are the possible causes?"] },
+      { day: 10, title: "NAT — real company use case", tags: ["theory","lab"],
+        learn: ["WHY NAT: company has 1 public IP, 500 PCs — NAT is why this works","Static NAT: server needs to be reached from internet (web server, CCTV)","Dynamic NAT + overload (PAT): what 99% of offices use"],
+        lab: ["Configure PAT: inside 192.168.1.0/24 → outside fa0/1 → internet","Test with ping, verify show ip nat translations"],
+        challenge: ["BREAK IT: ip nat inside/outside on wrong interface — no internet. Debug","BREAK IT: ACL for NAT wrong — blocks wrong subnet"],
+        interview: ["Why does every company use NAT?","Difference between static NAT and PAT?"] },
+      { day: 11, title: "DHCP — server + relay", tags: ["theory","lab"],
+        learn: ["DHCP DORA: Discover, Offer, Request, Acknowledge","ip helper-address: why needed when DHCP server is on different VLAN","Common DHCP issues: pool exhausted, wrong gateway in pool"],
+        lab: ["Configure DHCP server on router, assign to VLAN 10 PCs","Add ip helper-address for VLAN 20 to reach same server"],
+        challenge: ["BREAK IT: wrong default-router in DHCP pool — clients get IP but can't route","BREAK IT: pool exhausted — new device gets no IP. Fix with lease time"],
+        interview: ["PC gets 169.254.x.x address — what does that mean?","What is DHCP relay and when is it used?"] },
+      { day: 12, title: "ACL — standard + extended", tags: ["theory","lab"],
+        learn: ["ACL use cases: block department from accessing servers, permit only HTTP","Standard ACL: based on source IP only — place close to DESTINATION","Extended ACL: src + dst + port — place close to SOURCE","Implicit deny at end — the most common mistake"],
+        lab: ["Block VLAN 10 HR from accessing IT server (standard ACL)","Allow VLAN 20 to reach server only on port 80/443 (extended ACL)"],
+        challenge: ["BREAK IT: ACL applied in wrong direction — traffic blocked that shouldn't be","BREAK IT: forgot to permit other traffic — implicit deny kills everything"],
+        interview: ["HR team can't access the finance server — how would you check if ACL is blocking it?"] },
+      { day: 13, title: "DNS basics + connectivity troubleshooting", tags: ["theory","lab","challenge"],
+        learn: ["DNS: why 'google.com works but 8.8.8.8 doesn't' is a DNS issue","Reverse lookup, local DNS vs external","Ping vs nslookup vs traceroute — when to use which"],
+        lab: ["Simulate: IP works, DNS fails — configure ip name-server","Traceroute to find routing break"],
+        challenge: ["Scenario: User says 'internet is down'. Ping gateway = works. Ping 8.8.8.8 = works. Open browser = nothing. What is it?","Answer: DNS failure — walk through debug steps"],
+        interview: ["Ping works but browser doesn't open websites — what do you check?"] },
+      { day: 14, title: "Week 2 review + project 1", tags: ["project"],
+        learn: ["Complete Office Network — Project 1","VLAN + OSPF + NAT + DHCP + ACL combined topology"],
+        lab: ["Build: 2 branches connected via OSPF, DHCP per VLAN, NAT to internet, ACL restricting HR from Finance","This becomes your resume project"],
+        challenge: ["Give yourself 5 intentional breaks to troubleshoot cold (without knowing what you broke)"],
+        interview: ["Prepare 2-minute explanation of this project for interviews"] }
     ]
   },
   {
-    label: "Week 3", cls: "w3", title: "Troubleshooting Mastery (Interview Weapon)",
+    label: "Week 3", cls: "w3",
+    title: "Troubleshooting Mastery (Interview Weapon)",
     sub: "Days 15–21 · What actually gets you hired",
     days: [
-      {
-        day:15, title:"Troubleshooting methodology",
-        tags:["theory","challenge"],
-        learn:["OSI model as troubleshooting tool — start at Layer 1, go up","Top-down vs bottom-up: when to use each","5-step method: identify → isolate → test → fix → document"],
-        lab:["For every problem from now: write down your thought process before fixing"],
-        challenge:["Scenario: PC has IP, gateway pings, but can't reach server in another VLAN. Layer by layer debug"],
-        interview:["Tell me your approach when a user reports 'internet is down'"]
-      },
-      {
-        day:16, title:"Layer 1–2 failures (physical + data link)",
-        tags:["challenge","lab"],
-        learn:["show interfaces: what 'input errors', 'CRC errors', 'down/down' mean","Duplex mismatch — very common in real offices","Cable, SFP, port shutdown — physical causes"],
-        lab:["Simulate shutdown interface, wrong duplex — observe and fix"],
-        challenge:["BREAK IT: set one side to full-duplex, other to half — observe show interfaces output","BREAK IT: port security violation — interface goes err-disabled. Recovery steps"],
-        interview:["Interface shows 'up/down' — what does that mean and how do you fix it?"]
-      },
-      {
-        day:17, title:"Layer 3 failures (routing + IP)",
-        tags:["challenge","lab"],
-        learn:["Routing table reading: C, S, O, * — what each means","show ip route: what 'gateway of last resort not set' means","Asymmetric routing — common cause of one-way communication"],
-        lab:["Build scenario with missing route, wrong next-hop, missing default route"],
-        challenge:["BREAK IT: 5 routing failures back to back, timed — target 3 min per fix","No looking at config — use only show commands to diagnose"],
-        interview:["PC can ping gateway but not remote site — what are your steps?"]
-      },
-      {
-        day:18, title:"NAT + ACL failure scenarios",
-        tags:["challenge","lab"],
-        learn:["show ip nat translations: reading the output","debug ip nat: when to use in production (carefully!)","ACL log keyword: how to see what's being blocked"],
-        lab:["Break NAT 3 different ways — fix using only show commands"],
-        challenge:["BREAK IT: ACL blocking DHCP — clients don't get IPs. Debug without touching DHCP config","BREAK IT: NAT overload pool wrong — only first PC gets internet. Debug"],
-        interview:["Some users have internet, others don't — what do you check?"]
-      },
-      {
-        day:19, title:"OSPF failure scenarios",
-        tags:["challenge","lab"],
-        learn:["show ip ospf neighbor: states and what each means","Network type mismatch (broadcast vs point-to-point)","Redistribution basics — when one company merges with another"],
-        lab:["Force OSPF into each stuck state — identify and fix each"],
-        challenge:["BREAK IT: 4 OSPF failures simultaneously — fix in order of impact","Document: what you saw, what you checked, what you found, what you fixed"],
-        interview:["Branch office suddenly can't reach headquarters. OSPF is the routing protocol. Steps?"]
-      },
-      {
-        day:20, title:"Scenario practice — real interview questions",
-        tags:["interview","challenge"],
-        learn:["Practice verbal troubleshooting — say your steps out loud","Interviewers want to see your thought process, not just the answer"],
-        lab:["Practice these 5 scenarios verbally before touching any config"],
-        challenge:["Scenario 1: PC can't reach internet — ping gateway fails","Scenario 2: Two PCs on same VLAN can't ping each other","Scenario 3: OSPF neighbor dropped after a config change","Scenario 4: Some VLANs work, one doesn't after trunk config","Scenario 5: NAT stopped working — users lost internet overnight"],
-        interview:["Pick any 2 above and explain your full debug process step by step"]
-      },
-      {
-        day:21, title:"Troubleshooting lab — Project 2",
-        tags:["project","challenge"],
-        learn:["Project 2: Secure Network with documented troubleshooting","Build, break 6 things, document each fix as an incident report"],
-        lab:["Build full topology, intentionally break it, write: symptom → diagnosis → fix","This is your second resume project"],
-        challenge:["Give the broken topology to a friend / study partner — can they fix it using your notes?"],
-        interview:["Tell me about a time you troubleshot a network issue (use this project as your answer)"]
-      }
+      { day: 15, title: "Troubleshooting methodology", tags: ["theory","challenge"],
+        learn: ["OSI model as troubleshooting tool — start at Layer 1, go up","Top-down vs bottom-up: when to use each","5-step method: identify → isolate → test → fix → document"],
+        lab: ["For every problem from now: write down your thought process before fixing"],
+        challenge: ["Scenario: PC has IP, gateway pings, but can't reach server in another VLAN. Layer by layer debug"],
+        interview: ["Tell me your approach when a user reports 'internet is down'"] },
+      { day: 16, title: "Layer 1–2 failures (physical + data link)", tags: ["challenge","lab"],
+        learn: ["show interfaces: what 'input errors', 'CRC errors', 'down/down' mean","Duplex mismatch — very common in real offices","Cable, SFP, port shutdown — physical causes"],
+        lab: ["Simulate shutdown interface, wrong duplex — observe and fix"],
+        challenge: ["BREAK IT: set one side to full-duplex, other to half — observe show interfaces output","BREAK IT: port security violation — interface goes err-disabled. Recovery steps"],
+        interview: ["Interface shows 'up/down' — what does that mean and how do you fix it?"] },
+      { day: 17, title: "Layer 3 failures (routing + IP)", tags: ["challenge","lab"],
+        learn: ["Routing table reading: C, S, O, * — what each means","show ip route: what 'gateway of last resort not set' means","Asymmetric routing — common cause of one-way communication"],
+        lab: ["Build scenario with missing route, wrong next-hop, missing default route"],
+        challenge: ["BREAK IT: 5 routing failures back to back, timed — target 3 min per fix","No looking at config — use only show commands to diagnose"],
+        interview: ["PC can ping gateway but not remote site — what are your steps?"] },
+      { day: 18, title: "NAT + ACL failure scenarios", tags: ["challenge","lab"],
+        learn: ["show ip nat translations: reading the output","debug ip nat: when to use in production (carefully!)","ACL log keyword: how to see what's being blocked"],
+        lab: ["Break NAT 3 different ways — fix using only show commands"],
+        challenge: ["BREAK IT: ACL blocking DHCP — clients don't get IPs. Debug without touching DHCP config","BREAK IT: NAT overload pool wrong — only first PC gets internet. Debug"],
+        interview: ["Some users have internet, others don't — what do you check?"] },
+      { day: 19, title: "OSPF failure scenarios", tags: ["challenge","lab"],
+        learn: ["show ip ospf neighbor: states and what each means","Network type mismatch (broadcast vs point-to-point)","Redistribution basics — when one company merges with another"],
+        lab: ["Force OSPF into each stuck state — identify and fix each"],
+        challenge: ["BREAK IT: 4 OSPF failures simultaneously — fix in order of impact","Document: what you saw, what you checked, what you found, what you fixed"],
+        interview: ["Branch office suddenly can't reach headquarters. OSPF is the routing protocol. Steps?"] },
+      { day: 20, title: "Scenario practice — real interview questions", tags: ["interview","challenge"],
+        learn: ["Practice verbal troubleshooting — say your steps out loud","Interviewers want to see your thought process, not just the answer"],
+        lab: ["Practice these 5 scenarios verbally before touching any config"],
+        challenge: ["Scenario 1: PC can't reach internet — ping gateway fails","Scenario 2: Two PCs on same VLAN can't ping each other","Scenario 3: OSPF neighbor dropped after a config change","Scenario 4: Some VLANs work, one doesn't after trunk config","Scenario 5: NAT stopped working — users lost internet overnight"],
+        interview: ["Pick any 2 above and explain your full debug process step by step"] },
+      { day: 21, title: "Troubleshooting lab — Project 2", tags: ["project","challenge"],
+        learn: ["Project 2: Secure Network with documented troubleshooting","Build, break 6 things, document each fix as an incident report"],
+        lab: ["Build full topology, intentionally break it, write: symptom → diagnosis → fix","This is your second resume project"],
+        challenge: ["Give the broken topology to a friend / study partner — can they fix it using your notes?"],
+        interview: ["Tell me about a time you troubleshot a network issue (use this project as your answer)"] }
     ]
   },
   {
-    label: "Week 4", cls: "w4", title: "Interview Prep + Job Applications",
+    label: "Week 4", cls: "w4",
+    title: "Interview Prep + Job Applications",
     sub: "Days 22–30 · Land the job",
     days: [
-      {
-        day:22, title:"CLI speed drills",
-        tags:["lab","challenge"],
-        learn:["show ip route, show ip int brief, show vlan brief, show run — these 4 commands = 80% of troubleshooting","Timed: configure a VLAN + assign port + verify in under 3 min","Timed: full OSPF setup 2 routers in under 5 min"],
-        lab:["Do every lab this week with a timer — simulate interview pressure"],
-        challenge:["Blind config: given only a network diagram, configure from scratch with no notes"],
-        interview:["Interviewers sometimes ask you to configure live in Packet Tracer — be ready"]
-      },
-      {
-        day:23, title:"Interview Q&A — protocols",
-        tags:["interview"],
-        learn:["Prepare 1-paragraph answers (not 1 word) for all key protocols"],
-        lab:["Write out your answers, practice saying them out loud"],
-        challenge:["Answer these without notes: Why OSPF? Why NAT? Why VLAN? Difference VLAN vs subnet? What is STP? What is trunking?"],
-        interview:["Focus on: WHY the protocol exists + WHEN a company uses it + ONE real problem it solves"]
-      },
-      {
-        day:24, title:"Interview Q&A — troubleshooting",
-        tags:["interview"],
-        learn:["Practice the most common troubleshooting scenarios asked in NOC/L1 interviews","Structure your answer: symptom → what I checked → what I found → how I fixed it"],
-        lab:["Record yourself answering — watch it back"],
-        challenge:["Answer cold: 'User says internet is down. Walk me through exactly what you do.'","Answer cold: 'OSPF adjacency is down between two routers — steps?'"],
-        interview:["Interviewers love structured answers — use the 4-step format every time"]
-      },
-      {
-        day:25, title:"Project 3 — Troubleshooting lab doc",
-        tags:["project"],
-        learn:["Build Project 3: a documented troubleshooting portfolio","5 scenarios: what broke, what you saw, commands used, how you fixed it"],
-        lab:["Format each scenario as a mini incident report","This is what you show when asked 'do you have any hands-on experience?'"],
-        challenge:["Each scenario must include: exact show command output + your interpretation of it"],
-        interview:["Having real documentation = massive advantage over candidates who just say 'I know Cisco'"]
-      },
-      {
-        day:26, title:"NOC tools awareness",
-        tags:["theory"],
-        learn:["What NOC engineers actually use: SolarWinds, Nagios, PRTG, Zabbix","SNMP: what it is, why monitoring tools use it","Syslog: where logs go, how to read basic log messages","Ticket systems: ServiceNow, Jira — you'll use these every day"],
-        lab:["Watch 1 YouTube walkthrough of SolarWinds or PRTG dashboard — just awareness"],
-        challenge:["Understand: what does a NOC engineer's first hour of a shift look like?"],
-        interview:["Have you used any network monitoring tools? — Answer: yes, I'm familiar with SNMP-based tools and have studied SolarWinds/PRTG workflows"]
-      },
-      {
-        day:27, title:"Resume + LinkedIn update",
-        tags:["interview"],
-        learn:["List your 3 projects by name with what protocols you used","Skills section: mention Cisco IOS, Packet Tracer, specific protocols","CCNA mention (in progress) shows commitment — add it even if not done"],
-        lab:["Update resume. Add: Network Lab Projects section with 3 bullet points per project","Write a 3-line LinkedIn summary focused on networking troubleshooting"],
-        challenge:["Have someone from tech/networking read your resume and give feedback"],
-        interview:["Hiring managers spend 10 seconds on a resume — make your 3 projects the first thing they see"]
-      },
-      {
-        day:28, title:"Apply — roles and how to reach out",
-        tags:["interview"],
-        learn:["Target roles: NOC Engineer, Network Support Engineer, L1 Network Engineer, IT Support (network)","LinkedIn + Naukri + Indeed — set alerts for these keywords","Cold connect on LinkedIn to NOC managers and network team leads"],
-        lab:["Apply to 10 jobs today","Connect with 5 people in networking roles on LinkedIn with a short message"],
-        challenge:["Message template: 'Hi [name], I'm actively preparing for NOC/L1 network roles with hands-on Cisco lab experience. I'd appreciate any advice on breaking into the field.'"],
-        interview:["Most entry-level jobs are filled by referrals — LinkedIn connections matter more than applications"]
-      },
-      {
-        day:29, title:"Mock interview — full simulation",
-        tags:["interview","challenge"],
-        learn:["Simulate a full 30-min technical interview","Ask a friend or use ChatGPT to ask you questions"],
-        lab:["Cover: intro, 3 protocol questions, 2 troubleshooting scenarios, 1 live config in PT"],
-        challenge:["Full mock without pausing. After: list 3 things you stumbled on — fix those today"],
-        interview:["Questions to expect: subnetting calculation, OSPF vs static, VLAN scenario, PC can't reach internet walkthrough, NAT explanation"]
-      },
-      {
-        day:30, title:"Review + job application push",
-        tags:["project","interview"],
-        learn:["Review everything you've built: 3 projects, troubleshooting notes, interview Q&A","You are ready for NOC/L1/Support roles — apply confidently"],
-        lab:["Polish your 3 Packet Tracer projects — save screenshots for WhatsApp/email sharing","Final review of all key show commands and troubleshooting methodology"],
-        challenge:["Cold scenario — no notes: build a full office network in 15 min and break/fix 2 things","If you can do this: you are interview-ready"],
-        interview:["Your edge over other freshers: real lab projects + structured troubleshooting approach + WHY thinking — use it"]
-      }
+      { day: 22, title: "CLI speed drills", tags: ["lab","challenge"],
+        learn: ["show ip route, show ip int brief, show vlan brief, show run — these 4 commands = 80% of troubleshooting","Timed: configure a VLAN + assign port + verify in under 3 min","Timed: full OSPF setup 2 routers in under 5 min"],
+        lab: ["Do every lab this week with a timer — simulate interview pressure"],
+        challenge: ["Blind config: given only a network diagram, configure from scratch with no notes"],
+        interview: ["Interviewers sometimes ask you to configure live in Packet Tracer — be ready"] },
+      { day: 23, title: "Interview Q&A — protocols", tags: ["interview"],
+        learn: ["Prepare 1-paragraph answers (not 1 word) for all key protocols"],
+        lab: ["Write out your answers, practice saying them out loud"],
+        challenge: ["Answer these without notes: Why OSPF? Why NAT? Why VLAN? Difference VLAN vs subnet? What is STP? What is trunking?"],
+        interview: ["Focus on: WHY the protocol exists + WHEN a company uses it + ONE real problem it solves"] },
+      { day: 24, title: "Interview Q&A — troubleshooting", tags: ["interview"],
+        learn: ["Practice the most common troubleshooting scenarios asked in NOC/L1 interviews","Structure your answer: symptom → what I checked → what I found → how I fixed it"],
+        lab: ["Record yourself answering — watch it back"],
+        challenge: ["Answer cold: 'User says internet is down. Walk me through exactly what you do.'","Answer cold: 'OSPF adjacency is down between two routers — steps?'"],
+        interview: ["Interviewers love structured answers — use the 4-step format every time"] },
+      { day: 25, title: "Project 3 — Troubleshooting lab doc", tags: ["project"],
+        learn: ["Build Project 3: a documented troubleshooting portfolio","5 scenarios: what broke, what you saw, commands used, how you fixed it"],
+        lab: ["Format each scenario as a mini incident report","This is what you show when asked 'do you have any hands-on experience?'"],
+        challenge: ["Each scenario must include: exact show command output + your interpretation of it"],
+        interview: ["Having real documentation = massive advantage over candidates who just say 'I know Cisco'"] },
+      { day: 26, title: "NOC tools awareness", tags: ["theory"],
+        learn: ["What NOC engineers actually use: SolarWinds, Nagios, PRTG, Zabbix","SNMP: what it is, why monitoring tools use it","Syslog: where logs go, how to read basic log messages","Ticket systems: ServiceNow, Jira — you'll use these every day"],
+        lab: ["Watch 1 YouTube walkthrough of SolarWinds or PRTG dashboard — just awareness"],
+        challenge: ["Understand: what does a NOC engineer's first hour of a shift look like?"],
+        interview: ["Have you used any network monitoring tools? — Answer: yes, I'm familiar with SNMP-based tools and have studied SolarWinds/PRTG workflows"] },
+      { day: 27, title: "Resume + LinkedIn update", tags: ["interview"],
+        learn: ["List your 3 projects by name with what protocols you used","Skills section: mention Cisco IOS, Packet Tracer, specific protocols","CCNA mention (in progress) shows commitment — add it even if not done"],
+        lab: ["Update resume. Add: Network Lab Projects section with 3 bullet points per project","Write a 3-line LinkedIn summary focused on networking troubleshooting"],
+        challenge: ["Have someone from tech/networking read your resume and give feedback"],
+        interview: ["Hiring managers spend 10 seconds on a resume — make your 3 projects the first thing they see"] },
+      { day: 28, title: "Apply — roles and how to reach out", tags: ["interview"],
+        learn: ["Target roles: NOC Engineer, Network Support Engineer, L1 Network Engineer, IT Support (network)","LinkedIn + Naukri + Indeed — set alerts for these keywords","Cold connect on LinkedIn to NOC managers and network team leads"],
+        lab: ["Apply to 10 jobs today","Connect with 5 people in networking roles on LinkedIn with a short message"],
+        challenge: ["Message template: 'Hi [name], I'm actively preparing for NOC/L1 network roles with hands-on Cisco lab experience. I'd appreciate any advice on breaking into the field.'"],
+        interview: ["Most entry-level jobs are filled by referrals — LinkedIn connections matter more than applications"] },
+      { day: 29, title: "Mock interview — full simulation", tags: ["interview","challenge"],
+        learn: ["Simulate a full 30-min technical interview","Ask a friend or use ChatGPT to ask you questions"],
+        lab: ["Cover: intro, 3 protocol questions, 2 troubleshooting scenarios, 1 live config in PT"],
+        challenge: ["Full mock without pausing. After: list 3 things you stumbled on — fix those today"],
+        interview: ["Questions to expect: subnetting calculation, OSPF vs static, VLAN scenario, PC can't reach internet walkthrough, NAT explanation"] },
+      { day: 30, title: "Review + job application push", tags: ["project","interview"],
+        learn: ["Review everything you've built: 3 projects, troubleshooting notes, interview Q&A","You are ready for NOC/L1/Support roles — apply confidently"],
+        lab: ["Polish your 3 Packet Tracer projects — save screenshots for WhatsApp/email sharing","Final review of all key show commands and troubleshooting methodology"],
+        challenge: ["Cold scenario — no notes: build a full office network in 15 min and break/fix 2 things","If you can do this: you are interview-ready"],
+        interview: ["Your edge over other freshers: real lab projects + structured troubleshooting approach + WHY thinking — use it"] }
     ]
   }
 ];
 
-const completed = new Set(JSON.parse(localStorage.getItem('nw_done') || '[]'));
+/* ── PROGRESS ── */
+const completed = new Set(JSON.parse(localStorage.getItem('ag_nw_done') || '[]'));
 
 function saveProgress() {
-  localStorage.setItem('nw_done', JSON.stringify([...completed]));
+  localStorage.setItem('ag_nw_done', JSON.stringify([...completed]));
   const pct = Math.round(completed.size / 30 * 100);
   document.getElementById('prog-bar').style.width = pct + '%';
-  document.getElementById('prog-txt').textContent = completed.size + ' / 30 days';
+  document.getElementById('prog-txt').innerHTML = completed.size + ' <span>/ 30 days</span>';
+}
+
+function getNoteKey(day) { return 'ag_note_' + day; }
+
+function saveNote(day) {
+  const val = document.getElementById('note-' + day).value;
+  localStorage.setItem(getNoteKey(day), val);
+  const saved = document.getElementById('note-saved-' + day);
+  saved.style.opacity = '1';
+  setTimeout(() => { saved.style.opacity = '0'; }, 1800);
 }
 
 function tagHtml(tags) {
   return tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
 }
 
+const weekNumCls = { w1: 'w1-num', w2: 'w2-num', w3: 'w3-num', w4: 'w4-num' };
+
+/* ── BUILD UI ── */
 function buildWeek(w) {
   const wDiv = document.createElement('div');
-  wDiv.style.marginBottom = '8px';
+  wDiv.className = 'week-block';
 
   const hdr = document.createElement('div');
   hdr.className = 'week-header ' + w.cls;
-  hdr.innerHTML = `<span class="week-badge">${w.label}</span><span class="week-title">${w.title}</span><span class="week-sub">${w.sub}</span><span class="chevron">▶</span>`;
+  hdr.innerHTML = `
+    <span class="week-pill">${w.label}</span>
+    <span class="week-title">${w.title}</span>
+    <span class="week-sub">${w.sub}</span>
+    <span class="wchev">▶</span>`;
 
   const body = document.createElement('div');
   body.className = 'week-body';
 
   hdr.onclick = () => {
     const open = body.classList.toggle('open');
-    hdr.querySelector('.chevron').textContent = open ? '▼' : '▶';
+    hdr.classList.toggle('open', open);
   };
 
   const grid = document.createElement('div');
   grid.className = 'day-grid';
+  const numCls = weekNumCls[w.cls];
 
   w.days.forEach(d => {
+    const savedNote = localStorage.getItem(getNoteKey(d.day)) || '';
+    const isDone = completed.has(d.day);
     const card = document.createElement('div');
-    card.className = 'day-card' + (completed.has(d.day) ? ' done' : '');
+    card.className = 'day-card' + (isDone ? ' done' : '');
     card.id = 'day-' + d.day;
 
-    const numStyle = {w1:'background:#E6F1FB;color:#0C447C',w2:'background:#E1F5EE;color:#085041',w3:'background:#FAEEDA;color:#633806',w4:'background:#FAECE7;color:#712B13'}[w.cls];
+    const chk = isDone ? '✓' : ('DAY ' + d.day);
 
-    const chk = completed.has(d.day) ? '✓' : ('Day ' + d.day);
     card.innerHTML = `
-      <div class="day-card-header" onclick="toggleDay(${d.day}, this)">
-        <span class="day-num" style="${numStyle}">${chk}</span>
+      <div class="day-card-header" onclick="toggleDay(${d.day})">
+        <span class="day-num ${numCls}" id="dnum-${d.day}">${chk}</span>
         <span class="day-title">${d.title}</span>
         <div class="day-tags">${tagHtml(d.tags)}</div>
       </div>
       <div class="day-detail" id="dd-${d.day}">
         <div class="detail-section">
-          <div class="detail-label">What you learn (+ why companies use it)</div>
-          <ul class="detail-list">${d.learn.map(x=>`<li>${x}</li>`).join('')}</ul>
+          <span class="detail-label">What you learn + why companies use it</span>
+          <ul class="detail-list">${d.learn.map(x => `<li>${x}</li>`).join('')}</ul>
         </div>
         <div class="detail-section">
-          <div class="detail-label">Lab tasks</div>
-          <ul class="detail-list">${d.lab.map(x=>`<li>${x}</li>`).join('')}</ul>
+          <span class="detail-label">Lab tasks</span>
+          <ul class="detail-list">${d.lab.map(x => `<li>${x}</li>`).join('')}</ul>
         </div>
         <div class="challenge-box">
-          <div class="detail-label">🔧 Break &amp; fix challenge</div>
-          <ul class="detail-list">${d.challenge.map(x=>`<li>${x}</li>`).join('')}</ul>
+          <span class="detail-label">🔧 Break &amp; fix challenge</span>
+          <ul class="detail-list">${d.challenge.map(x => `<li>${x}</li>`).join('')}</ul>
         </div>
-        <div class="detail-section">
-          <div class="detail-label">Interview prep</div>
-          <ul class="detail-list">${d.interview.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="interview-box">
+          <span class="detail-label">🎤 Interview prep</span>
+          <ul class="detail-list">${d.interview.map(x => `<li>${x}</li>`).join('')}</ul>
         </div>
-        <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
-          <button class="complete-btn" onclick="markDone(${d.day})" id="btn-${d.day}">${completed.has(d.day)?'✓ Done':'Mark complete'}</button>
-          <button class="ask-btn" onclick="sendPrompt('Day ${d.day}: ${d.title} — explain in job context with troubleshooting tips ↗')">Ask Claude about this day ↗</button>
+        <div class="notes-wrap">
+          <div class="notes-label">My notes</div>
+          <textarea
+            class="notes-area"
+            id="note-${d.day}"
+            maxlength="300"
+            placeholder="e.g. Learned VLSM today, struggled with /28 — revisit tomorrow..."
+            oninput="saveNote(${d.day})"
+          >${savedNote}</textarea>
+          <div class="notes-saved" id="note-saved-${d.day}">✓ Saved</div>
+        </div>
+        <div class="btn-row">
+          <button class="complete-btn" onclick="markDone(${d.day})" id="btn-${d.day}">
+            ${isDone ? '✓ Completed' : 'Mark complete'}
+          </button>
+          <button class="ask-btn"
+            onclick="sendPrompt('Day ${d.day}: ${d.title} — give me job-context explanation with troubleshooting tips')">
+            Ask Claude ↗
+          </button>
         </div>
       </div>`;
+
     grid.appendChild(card);
   });
 
@@ -363,24 +390,23 @@ function buildWeek(w) {
   document.getElementById('weeks').appendChild(wDiv);
 }
 
-window.toggleDay = function(n, hdr) {
-  const detail = document.getElementById('dd-' + n);
-  detail.classList.toggle('open');
+window.toggleDay = function(n) {
+  document.getElementById('dd-' + n).classList.toggle('open');
 };
 
 window.markDone = function(n) {
   if (completed.has(n)) { completed.delete(n); } else { completed.add(n); }
-  const card = document.getElementById('day-' + n);
-  const btn = document.getElementById('btn-' + n);
-  const numEl = card.querySelector('.day-num');
+  const card  = document.getElementById('day-' + n);
+  const btn   = document.getElementById('btn-' + n);
+  const numEl = document.getElementById('dnum-' + n);
   if (completed.has(n)) {
     card.classList.add('done');
-    btn.textContent = '✓ Done';
+    btn.textContent = '✓ Completed';
     numEl.textContent = '✓';
   } else {
     card.classList.remove('done');
     btn.textContent = 'Mark complete';
-    numEl.textContent = 'Day ' + n;
+    numEl.textContent = 'DAY ' + n;
   }
   saveProgress();
 };
