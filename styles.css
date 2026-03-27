@@ -1,0 +1,753 @@
+/* ===================== ROOT & VARIABLES ===================== */
+:root {
+  --primary: #0066cc;
+  --primary-light: #e6f1fb;
+  --primary-dark: #0c447c;
+
+  --success: #1d9e75;
+  --success-light: #e1f5ee;
+
+  --info: #085041;
+  --warning: #633806;
+  --warning-light: #faeeda;
+
+  --danger: #712b13;
+  --danger-light: #faece7;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --text-inverse: #ffffff;
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #efefef;
+
+  --border: #e0e0e0;
+  --border-secondary: #d0d0d0;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================== GLOBAL STYLES ===================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ===================== CONTAINER & ROADMAP ===================== */
+.roadmap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===================== PROGRESS BAR ===================== */
+.progress-bar-wrap {
+  margin-bottom: 32px;
+  animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.progress-label span:last-child {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.progress-outer {
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 99px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.progress-inner {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+}
+
+/* ===================== WEEKS ===================== */
+#weeks {
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===================== WEEK HEADER ===================== */
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  margin-bottom: 2px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  user-select: none;
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.week-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.week-header:hover {
+  background: var(--bg-primary);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+  transform: translateX(4px);
+}
+
+.week-header:hover::before {
+  opacity: 0.7;
+}
+
+/* Week-specific colors */
+.w1 .week-header::before { color: var(--primary); }
+.w2 .week-header::before { color: var(--success); }
+.w3 .week-header::before { color: var(--warning); }
+.w4 .week-header::before { color: var(--danger); }
+
+.week-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.w1 .week-badge {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.w2 .week-badge {
+  background: var(--success-light);
+  color: var(--info);
+}
+
+.w3 .week-badge {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.w4 .week-badge {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.week-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.week-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: none;
+}
+
+.chevron {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+.week-header:hover .chevron {
+  color: var(--primary);
+}
+
+.week-body.open .week-header .chevron {
+  transform: rotate(90deg);
+}
+
+/* ===================== WEEK BODY ===================== */
+.week-body {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.week-body.open {
+  display: block;
+  max-height: 5000px;
+}
+
+.day-grid {
+  display: grid;
+  gap: 12px;
+  padding: 12px 0;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== DAY CARD ===================== */
+.day-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  overflow: hidden;
+  transition: var(--transition);
+  position: relative;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--success));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.day-card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.day-card:hover::before {
+  opacity: 1;
+}
+
+.day-card.done {
+  background: rgba(29, 158, 117, 0.05);
+  border-color: var(--success);
+}
+
+.day-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.day-card-header:hover {
+  background: var(--bg-secondary);
+}
+
+.day-num {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 48px;
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.day-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+  transition: color 0.2s ease;
+}
+
+.day-card:hover .day-title {
+  color: var(--primary);
+}
+
+.day-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tag-lab {
+  background: var(--success-light);
+  color: var(--info);
+}
+
+.tag-theory {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.tag-challenge {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.tag-interview {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.tag-project {
+  background: #eeedfe;
+  color: #3c3489;
+}
+
+/* ===================== DAY DETAIL ===================== */
+.day-detail {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  padding: 0 14px;
+  border-top: 1px solid var(--border);
+}
+
+.day-detail.open {
+  display: block;
+  max-height: 2000px;
+  padding: 16px 14px;
+  animation: expandDown 0.4s ease-out;
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.detail-section {
+  margin-bottom: 16px;
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.detail-list {
+  list-style: none;
+}
+
+.detail-list li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 6px 0 6px 16px;
+  position: relative;
+  line-height: 1.5;
+  animation: slideInLeft 0.3s ease-out backwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.detail-list li:nth-child(1) { animation-delay: 0.05s; }
+.detail-list li:nth-child(2) { animation-delay: 0.1s; }
+.detail-list li:nth-child(3) { animation-delay: 0.15s; }
+.detail-list li:nth-child(4) { animation-delay: 0.2s; }
+.detail-list li:nth-child(5) { animation-delay: 0.25s; }
+
+.detail-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+/* ===================== CHALLENGE BOX ===================== */
+.challenge-box {
+  background: linear-gradient(135deg, rgba(250, 236, 231, 0.5), rgba(250, 236, 231, 0.3));
+  border: 1.5px solid var(--danger-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-top: 12px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--danger);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.challenge-box:hover {
+  background: linear-gradient(135deg, rgba(250, 236, 231, 0.8), rgba(250, 236, 231, 0.6));
+  box-shadow: 0 0 10px rgba(113, 43, 19, 0.1);
+}
+
+.challenge-box:hover::before {
+  opacity: 1;
+}
+
+.challenge-box .detail-label {
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+
+.challenge-box .detail-list li {
+  color: var(--danger);
+  padding-left: 16px;
+}
+
+.challenge-box .detail-list li::before {
+  background: var(--danger);
+}
+
+/* ===================== BUTTONS ===================== */
+.complete-btn,
+.ask-btn {
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1.5px solid;
+  font-weight: 500;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.complete-btn {
+  border-color: var(--success);
+  color: var(--success);
+  background: rgba(29, 158, 117, 0.08);
+}
+
+.complete-btn:hover {
+  background: var(--success);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(29, 158, 117, 0.3);
+}
+
+.complete-btn:active {
+  transform: scale(0.95);
+}
+
+.ask-btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(0, 102, 204, 0.08);
+}
+
+.ask-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.ask-btn:active {
+  transform: scale(0.95);
+}
+
+.day-detail > div:last-child {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+  animation: slideInUp 0.4s ease-out 0.2s both;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== DONE STATE ===================== */
+.done .day-title {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.done .day-num {
+  background: var(--success);
+  color: white;
+  position: relative;
+}
+
+.done .day-num::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  animation: checkMark 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes checkMark {
+  0% {
+    box-shadow: inset 0 0 0 20px var(--success);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0px var(--success);
+  }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .roadmap {
+    border-radius: var(--radius-lg);
+    padding: 20px 16px;
+  }
+
+  .week-sub {
+    display: block !important;
+  }
+
+  .week-title {
+    font-size: 13px;
+  }
+
+  .day-grid {
+    gap: 10px;
+  }
+
+  .day-card-header {
+    flex-wrap: wrap;
+    padding: 12px 10px;
+  }
+
+  .day-tags {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap {
+    padding: 16px 12px;
+  }
+
+  .progress-label {
+    font-size: 12px;
+  }
+
+  .week-header {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .week-badge {
+    font-size: 9px;
+    padding: 2px 8px;
+  }
+
+  .week-title {
+    font-size: 12px;
+  }
+
+  .day-card-header {
+    padding: 10px 8px;
+  }
+
+  .day-num {
+    font-size: 10px;
+    min-width: 40px;
+    height: 32px;
+    padding: 4px 6px;
+  }
+
+  .day-title {
+    font-size: 13px;
+  }
+
+  .day-tags {
+    gap: 2px;
+  }
+
+  .tag {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .complete-btn,
+  .ask-btn {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .day-detail > div:last-child {
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+
+  .complete-btn,
+  .ask-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===================== LOADING ANIMATION ===================== */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ===================== SCROLLBAR STYLING ===================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
